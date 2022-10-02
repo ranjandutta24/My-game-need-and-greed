@@ -42,7 +42,7 @@ const hold = () => {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       playing = false;
       diceEl.classList.add(`hidden`);
       document
@@ -56,10 +56,23 @@ const hold = () => {
     }
   }
 };
-
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add(`hidden`);
-
+const startNew = () => {
+  playing = true;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  diceEl.classList.add(`hidden`);
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove(`player--winner`);
+  activePlayer = 0;
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add(`player--active`);
+  currentScore = 0;
+};
+startNew();
 btnRoll.addEventListener(`click`, diceRoll);
 btnHold.addEventListener(`click`, hold);
+btnNew.addEventListener(`click`, startNew);
